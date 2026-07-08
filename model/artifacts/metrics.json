@@ -1,0 +1,14 @@
+{
+  "roc_auc": 0.8415,
+  "pr_auc": 0.6325,
+  "f1_minority": 0.6136,
+  "recall_minority": 0.7834,
+  "confusion_matrix": {
+    "true_negative": 747,
+    "false_positive": 288,
+    "false_negative": 81,
+    "true_positive": 293
+  },
+  "test_size": 1409,
+  "note": "Acur\u00e1cia deliberadamente omitida como m\u00e9trica principal \u2014 dataset desbalanceado (~26.5% churn); ROC-AUC/PR-AUC/recall da classe minorit\u00e1ria s\u00e3o mais informativas."
+}
