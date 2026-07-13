@@ -1,5 +1,10 @@
 """Página: escolhe/edita um cliente e chama o agente via API."""
+import sys
+from pathlib import Path
+
 import streamlit as st
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent.parent))
 
 from dashboard import api_client
 

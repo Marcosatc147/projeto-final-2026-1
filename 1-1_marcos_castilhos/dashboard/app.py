@@ -1,5 +1,10 @@
 """Dashboard Streamlit principal — Agente de Previsão de Churn."""
+import sys
+from pathlib import Path
+
 import streamlit as st
+
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
 
 from dashboard import api_client
 
