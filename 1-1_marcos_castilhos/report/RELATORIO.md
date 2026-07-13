@@ -1,6 +1,7 @@
 # Relatório Final — Agente de Previsão de Churn
 
-**Link da aplicação:** _pendente de deploy — ver [`DEPLOY.md`](DEPLOY.md)_
+**Link da aplicação (dashboard):** https://projeto-final-2026-1-marcos-castilhos.streamlit.app/
+**Link da API:** https://churn-agent-api.onrender.com
 **Link do repositório:** https://github.com/Marcosatc147/projeto-final-2026-1
 **Integrante:** Marcos Castilhos (trabalho individual)
 
@@ -87,11 +88,19 @@ Decisões consideradas antes de fechar a versão final:
   (`churn_model.pkl`) é versionado no repositório — não precisa re-treinar no build.
   O dataset bruto (CSV) **não** é versionado; é baixado via `kagglehub` na primeira
   execução (requer `KAGGLEHUB_API_TOKEN`).
-- **Hospedagem:** API no Render (Docker), dashboard no Streamlit Community Cloud —
-  ver [`DEPLOY.md`](DEPLOY.md) para o passo a passo e para os links finais.
+- **Hospedagem:** API publicada no Render (Docker,
+  https://churn-agent-api.onrender.com) e dashboard no Streamlit Community Cloud
+  (https://projeto-final-2026-1-marcos-castilhos.streamlit.app/) — ver
+  [`DEPLOY.md`](DEPLOY.md) para o passo a passo seguido.
 - **Entrada em produção:** o dashboard consome a API publicada via variável de
-  ambiente `API_URL`; localmente, a rede Docker resolve o hostname `api` entre os
+  ambiente `API_URL`. Localmente, a rede Docker resolve o hostname `api` entre os
   containers (testado com `docker compose exec dashboard python -c "requests.get('http://api:8000/health')"`).
+- **Ajuste necessário no deploy:** o Streamlit Community Cloud executa o app com o
+  working directory na raiz do repositório clonado, não na pasta do projeto — foi
+  preciso adicionar o diretório do projeto ao `sys.path` explicitamente em
+  `dashboard/app.py` e `dashboard/pages/1_Simular_Cliente.py` para o import
+  `from dashboard import api_client` resolver corretamente (não reproduzível em
+  testes locais, só percebido no ambiente real do Streamlit Cloud).
 
 ### CI/CD
 
@@ -203,8 +212,14 @@ clientes de demonstração no dashboard (`GET /customers/sample`). Ver
 
 ## Demonstração
 
-_Link do vídeo: pendente de gravação — a ser adicionado antes da entrega final
-(13/07/2026)._
+Vídeo de demonstração não gravado dado o prazo. O sistema pode ser testado
+diretamente no link da aplicação acima — o fluxo golden path é: abrir o dashboard →
+página "Simular Cliente" → "Carregar amostra de clientes" → selecionar um cliente →
+"Analisar".
+
+> **Nota sobre o Render (free tier):** a API "dorme" após ~15 min de inatividade; a
+> primeira requisição após esse período pode levar 30-60s para responder (cold
+> start) antes de a explicação do agente aparecer no dashboard.
 
 ---
 
@@ -228,8 +243,8 @@ _Link do vídeo: pendente de gravação — a ser adicionado antes da entrega fi
   LogisticRegression com coeficientes já atendeu bem ao prazo e à necessidade de
   explicabilidade.
 - CI/CD não foi implementado — os testes rodam manualmente.
-- O deploy em produção (Render + Streamlit Cloud) ainda está pendente no momento
-  da escrita deste relatório — requer login manual em serviços de terceiros.
+- Vídeo de demonstração não foi gravado dado o prazo — o sistema pode ser testado
+  diretamente pelos links da aplicação.
 
 **Próximos passos com mais tempo:**
 - Implementar CI (GitHub Actions rodando `pytest` a cada PR).
