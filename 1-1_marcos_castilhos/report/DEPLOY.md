@@ -1,7 +1,7 @@
 # Guia de Deploy — Render (API) + Streamlit Community Cloud (dashboard)
 
 Repositório: `https://github.com/Marcosatc147/projeto-final-2026-1`
-Pasta do projeto dentro do repo: `(1-1_marcos_castilhos)/`
+Pasta do projeto dentro do repo: `1-1_marcos_castilhos/`
 
 ## 1. Deploy da API no Render
 
@@ -9,7 +9,7 @@ Pasta do projeto dentro do repo: `(1-1_marcos_castilhos)/`
 2. **New +** → **Web Service**.
 3. Conecte o repositório `Marcosatc147/projeto-final-2026-1`.
 4. Configurações:
-   - **Root Directory:** `(1-1_marcos_castilhos)`
+   - **Root Directory:** `1-1_marcos_castilhos`
    - **Environment:** `Docker`
    - **Dockerfile Path:** `api/Dockerfile`
    - **Docker Build Context Directory:** `.` (relativo ao Root Directory acima)
@@ -31,7 +31,7 @@ Pasta do projeto dentro do repo: `(1-1_marcos_castilhos)/`
 2. **New app** → selecione o repositório `Marcosatc147/projeto-final-2026-1`.
 3. Configurações:
    - **Branch:** `main`
-   - **Main file path:** `(1-1_marcos_castilhos)/dashboard/app.py`
+   - **Main file path:** `1-1_marcos_castilhos/dashboard/app.py`
 4. Em **Advanced settings → Secrets**, adicione (formato TOML):
    ```toml
    API_URL = "https://<sua-url-do-render>.onrender.com"
@@ -42,6 +42,4 @@ Pasta do projeto dentro do repo: `(1-1_marcos_castilhos)/`
 ## 3. Após o deploy
 
 - Atualizar o cabeçalho do `RELATORIO.md` com os dois links (API e dashboard).
-- Testar o fluxo completo na URL pública antes de gravar o vídeo de demonstração.
-- Se o Render "dormir" durante a demo, aguardar o cold start ou fazer um request de
-  aquecimento (`curl .../health`) alguns minutos antes de gravar.
+- Testar o fluxo completo na URL pública.
